@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "dev": "yarn workspace @will-wallet/frontend/dev"
+    "dev": "yarn workspace @will-wallet/frontend dev"
   },
   "devDependencies": {
     "@openzeppelin/contracts-upgradeable": "^4.8.3",

@@ -1440,8 +1440,8 @@
       ]
     },
     "/Users/alieray/Desktop/will-wallet-leading-privacy/packages/backend/contracts/Inheritance.sol": {
-      "lastModificationDate": 1682682189044,
-      "contentHash": "60f5c26cea4e8a46a229338202be02f6",
+      "lastModificationDate": 1682705414820,
+      "contentHash": "510b816f74c82457f5fac9a5645bce5d",
       "sourceName": "contracts/Inheritance.sol",
       "solcConfig": {
         "version": "0.8.13",

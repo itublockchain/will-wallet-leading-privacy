@@ -18,6 +18,7 @@
     "@matterlabs/hardhat-zksync-solc": "^0.3.16",
     "@matterlabs/zksync-contracts": "^0.6.1",
     "@openzeppelin/contracts": "^4.8.3",
+    "dotenv": "^16.0.3",
     "hardhat": "^2.14.0",
     "zksync-web3": "^0.14.3"
   }

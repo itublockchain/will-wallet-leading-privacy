@@ -8,7 +8,10 @@
     "compile": "hardhat compile"
   },
   "devDependencies": {
+    "@matterlabs/hardhat-zksync-verify": "^0.1.5",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
     "@openzeppelin/contracts-upgradeable": "^4.8.3",
+    "@types/mocha": "^10.0.1",
     "ethers": "^5.7.0",
     "hardhat": "^2.14.0",
     "ts-node": "^10.9.1",
@@ -19,6 +22,7 @@
     "@matterlabs/hardhat-zksync-solc": "^0.3.16",
     "@matterlabs/zksync-contracts": "^0.6.1",
     "@openzeppelin/contracts": "^4.8.3",
+    "chai": "^4.3.7",
     "dotenv": "^16.0.3",
     "hardhat": "^2.14.0",
     "zksync-web3": "^0.14.3"

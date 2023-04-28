@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/muhittin/Desktop/will-wallet/packages/backend/contracts/Account.sol": {
-      "lastModificationDate": 1682666665527,
+    "/home/utku/hackathon/will-wallet-leading-privacy/packages/backend/contracts/Account.sol": {
+      "lastModificationDate": 1682666775028,
       "contentHash": "2789e8f8704402d772c1f165c05b8a76",
       "sourceName": "contracts/Account.sol",
       "solcConfig": {

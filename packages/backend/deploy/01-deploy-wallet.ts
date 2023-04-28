@@ -6,13 +6,13 @@ import { utils, Wallet, Provider } from "zksync-web3";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 export default async function (hre: HardhatRuntimeEnvironment) {
-  console.log(`Running deploy script for the Greeter contract`);
+  console.log(`Running deploy script for AA`);
   const provider = new Provider("https://zksync2-testnet.zksync.dev");
   const wallet = new Wallet(PRIVATE_KEY || "", provider);
 
   const deployer = new Deployer(hre, wallet);
   const factoryArtifact = await deployer.loadArtifact("AAFactory");
-  
+
   const aaArtifact = await deployer.loadArtifact("Account");
 
   const factory = await deployer.deploy(
@@ -27,11 +27,10 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     factoryArtifact.abi,
     wallet
   );
-  const owner = Wallet.createRandom();
-  console.log("owner pk: ", owner.privateKey);
+  /* const owner = await wallet.getSinger();
+  */
   const salt = ethers.constants.HashZero;
-
-  const tx = await aaFactory.deployAccount(salt, owner.address);
+  const tx = await aaFactory.deployAccount(salt, wallet.address);
   await tx.wait();
 
   const abiCoder = new ethers.utils.AbiCoder();
@@ -39,7 +38,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     factory.address,
     await aaFactory.aaBytecodeHash(),
     salt,
-    abiCoder.encode(["address"], [owner.address])
+    abiCoder.encode(["address"], [wallet.address])
   );
 
   console.log(`Account deployed on address ${accountAddress}`);
@@ -47,7 +46,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   await (
     await wallet.sendTransaction({
       to: accountAddress,
-      value: ethers.utils.parseEther("0.02"),
+      value: ethers.utils.parseEther("0.01"),
     })
   ).wait();
 }

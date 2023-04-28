@@ -2,14 +2,15 @@ import { utils, Wallet, Provider } from 'zksync-web3';
 import * as ethers from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { Deployer } from '@matterlabs/hardhat-zksync-deploy';
+const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 export default async function (hre: HardhatRuntimeEnvironment) {
   const provider = new Provider('https://zksync2-testnet.zksync.dev');
-  const wallet = new Wallet('', provider);
+  const wallet = new Wallet(PRIVATE_KEY || "", provider);
   const deployer = new Deployer(hre, wallet);
   const factoryArtifact = await deployer.loadArtifact('AAFactory');
   const aaArtifact = await deployer.loadArtifact('Account');
-  const PRIVATE_KEY = process.env.PRIVATE_KEY
+ 
 
 
   const factory = await deployer.deploy(

@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Will Wallet",
+  "version": "1.0.0",
+  "description": "Custom wallet with zksync account abstraction",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

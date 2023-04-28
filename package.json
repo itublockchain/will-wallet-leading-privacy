@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.0"
+  },
+  "dependencies": {
+    "create-next-app": "^13.3.1"
   }
 }

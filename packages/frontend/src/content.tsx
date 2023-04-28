@@ -1,7 +1,7 @@
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig } from "plasmo"
 
-import { CountButton, Layout } from "~components"
+import { CountButton, Layout, TokensLayout } from "~components"
 
 import "~base.css"
 

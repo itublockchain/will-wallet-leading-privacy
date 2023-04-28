@@ -1,14 +1,15 @@
-import { CountButton, Layout, TokensLayout } from "./components"
+import { MemoryRouter } from "react-router-dom"
+
+import Routing from "./routes"
 
 import "~base.css"
 import "~style.css"
 
 function IndexPopup() {
   return (
-    <Layout>
-      <CountButton />
-      <TokensLayout />
-    </Layout>
+    <MemoryRouter>
+      <Routing />
+    </MemoryRouter>
   )
 }
 

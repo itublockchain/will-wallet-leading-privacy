@@ -3,9 +3,14 @@ import { useReducer } from "react"
 const CountButton = () => {
   const [count, increase] = useReducer((c) => c + 1, 0)
 
+  const handleClick = () => {
+    increase()
+    console.log(count)
+  }
+
   return (
     <button
-      onClick={() => increase()}
+      onClick={() => handleClick()}
       type="button"
       className="flex flex-row items-center px-4 py-2 text-sm rounded-lg transition-all border-none
       shadow-lg hover:shadow-md

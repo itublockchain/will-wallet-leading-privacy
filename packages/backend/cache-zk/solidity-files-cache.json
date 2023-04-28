@@ -1,0 +1,51 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/muhittin/Desktop/will-wallet/packages/backend/contracts/Account.sol": {
+      "lastModificationDate": 1682666665527,
+      "contentHash": "2789e8f8704402d772c1f165c05b8a76",
+      "sourceName": "contracts/Account.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        },
+        "zksolc": {
+          "version": "1.3.8",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "",
+            "experimental": {},
+            "isSystem": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": [
+        "Account"
+      ]
+    }
+  }
+}

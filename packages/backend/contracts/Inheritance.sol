@@ -10,12 +10,16 @@ contract Inheritance {
 
 
     address public owner;
-    address[] public beneficiaries;
     uint256 public lockDuration;
     uint256 public totalShares;
     uint256 public lastActive;
-    mapping(address => uint256) public beneficiaryShares;
 
+    struct Beneficiary {
+        address beneficiary;
+        uint256 sharesPercent;
+    }
+
+    Beneficiary[] public beneficiaries;
 
     event FundsClaimed(
         address indexed beneficiary,
@@ -40,72 +44,54 @@ contract Inheritance {
     }
 
 
-    function setBeneficiaries (
-        address[] memory _beneficiaries,
-        uint256[] memory _sharesPercent
+    function addBeneficiary(
+        address _beneficiary,
+        uint256 _sharesPercent
     ) external onlyAccount {
         require(
-            _beneficiaries.length == _sharesPercent.length,
-            "Beneficiaries and shares arrays must have the same length"
+            _sharesPercent > 0,
+            "Share percentage must be greater than 0"
+        );
+        require(
+            _sharesPercent <= 100,
+            "Share percentage must be less than or equal to 100"
+        );
+        require(
+            totalShares + _sharesPercent <= 100,
+            "Total shares must be less than or equal to 100"
         );
 
-        for (uint256 i = 0; i < _beneficiaries.length; i++) {
-            beneficiaries.push(_beneficiaries[i]);
-            beneficiaryShares[_beneficiaries[i]] = _sharesPercent[i];
-            totalShares += _sharesPercent[i];
-            require(
-                _sharesPercent[i] > 0,
-                "Share percentage must be greater than 0"
-            );
-            require(
-                _sharesPercent[i] <= 100,
-                "Share percentage must be less than or equal to 100"
-            );
-            require(
-                totalShares <= 100,
-                "Total shares must be less than or equal to 100"
-            );
+        beneficiaries.push(Beneficiary(_beneficiary, _sharesPercent));
+        totalShares += _sharesPercent;
+    }
+
+
+    function removeBeneficiary(
+        address _beneficiary
+    ) external onlyAccount {
+        for (uint256 i = 0; i < beneficiaries.length; i++) {
+            if (beneficiaries[i].beneficiary == _beneficiary) {
+                totalShares -= beneficiaries[i].sharesPercent;
+                delete beneficiaries[i];
+            }
         }
     }
 
 
-    function removeBeneficiary(address _beneficiary) external onlyAccount {
-        require(
-            beneficiaryShares[_beneficiary] > 0,
-            "Beneficiary does not exist"
-        );
-        totalShares -= beneficiaryShares[_beneficiary];
-        beneficiaryShares[_beneficiary] = 0;
-    }
-
-
-    function changeBeneficiaryShares(
-        address[] memory _beneficiaries,
-        uint256[] memory _sharesPercent
+    function updateBeneficiary(
+        address _beneficiary,
+        uint256 _sharesPercent
     ) external onlyAccount {
-        require(
-            _beneficiaries.length == _sharesPercent.length,
-            "Beneficiaries and shares arrays must have the same length"
-        );
-
-        for (uint256 i = 0; i < _beneficiaries.length; i++) {
-            totalShares -= beneficiaryShares[_beneficiaries[i]];
-            beneficiaryShares[_beneficiaries[i]] = _sharesPercent[i];
-            totalShares += _sharesPercent[i];
-            require(
-                _sharesPercent[i] > 0,
-                "Share percentage must be greater than 0"
-            );
-            require(
-                _sharesPercent[i] <= 100,
-                "Share percentage must be less than or equal to 100"
-            );
-            require(
-                totalShares <= 100,
-                "Total shares must be less than or equal to 100"
-            );
+        for (uint256 i = 0; i < beneficiaries.length; i++) {
+            if (beneficiaries[i].beneficiary == _beneficiary) {
+                totalShares -= beneficiaries[i].sharesPercent;
+                beneficiaries[i].sharesPercent = _sharesPercent;
+                totalShares += _sharesPercent;
+            }
         }
     }
+
+
     function updateLastActive() external {
         require(msg.sender == owner, "Only the owner can update activity");
         lastActive = block.timestamp;
@@ -136,19 +122,4 @@ contract Inheritance {
         lockDuration = _newLockDuration;
     }
 
-
-    function changeBeneficiaryShares(
-        address[] memory _beneficiaries,
-        uint256[] memory _shares
-    ) external {
-        require(msg.sender == owner, "Only the owner can change beneficiaries");
-        require(
-            _beneficiaries.length == _shares.length,
-            "Beneficiaries and shares arrays must have the same length"
-        );
-
-        for (uint256 i = 0; i < _beneficiaries.length; i++) {
-            beneficiaryShares[_beneficiaries[i]] = _shares[i];
-        }
-    }
 }

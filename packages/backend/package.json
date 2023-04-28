@@ -8,6 +8,8 @@
     "compile": "hardhat compile"
   },
   "devDependencies": {
+    "@matterlabs/hardhat-zksync-verify": "^0.1.5",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
     "@openzeppelin/contracts-upgradeable": "^4.8.3",
     "@types/mocha": "^10.0.1",
     "ethers": "^5.7.0",

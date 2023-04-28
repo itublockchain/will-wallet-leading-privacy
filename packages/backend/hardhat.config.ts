@@ -3,6 +3,8 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import "@matterlabs/hardhat-zksync-deploy";
 import "@matterlabs/hardhat-zksync-solc";
+import "@matterlabs/hardhat-zksync-verify";
+
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
@@ -25,9 +27,9 @@ const config: HardhatUserConfig = {
     zkSyncTestnet: {
       url: "https://zksync2-testnet.zksync.dev",
       accounts: [PRIVATE_KEY || ""],
-
       ethNetwork: "goerli",
       zksync: true,
+      verifyURL: 'https://zksync2-testnet-explorer.zksync.dev/contract_verification'
     },
   },
   solidity: {

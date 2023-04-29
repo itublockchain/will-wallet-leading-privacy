@@ -1,8 +1,6 @@
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig } from "plasmo"
 
-import { CountButton, Layout, TokensLayout } from "~components"
-
 import "~base.css"
 
 import Routing from "~routes"

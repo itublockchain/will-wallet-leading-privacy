@@ -15,7 +15,7 @@ const Profile = (props: ProfileProps) => {
     <div className="px-[15px] -mt-1">
       <div className="w-full h-[168px] flex flex-col text-white items-center justify-center gap-2">
         <div className="w-fit h-fit p-2 bg-white rounded-md">
-          <QRCode value={address} style={{ width: "70px", height: "70px" }} />
+          <QRCode value={address} style={{ width: "80px", height: "80px" }} />
         </div>
         <div>{accountName}</div>
         <div className="border-[1px] rounded-full px-4 py-1 border-[#4CBBAA] flex justify-between gap-4">

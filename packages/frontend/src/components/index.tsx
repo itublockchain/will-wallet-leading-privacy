@@ -1,11 +1,12 @@
 import ChainButton from "./ChainButton"
 import CountButton from "./CountButton"
 import Header from "./Header"
+import HomeOptions from "./HomeOptions"
 import Layout from "./Layout"
 import OptionsButton from "./OptionsButton"
 import Profile from "./Profile"
 import Token from "./Token"
-import TokensLayout from "./TokensLayout"
+import TokenContainer from "./TokenContainer"
 
 export {
   Layout,
@@ -14,6 +15,7 @@ export {
   OptionsButton,
   ChainButton,
   Profile,
-  TokensLayout,
-  Token
+  TokenContainer,
+  Token,
+  HomeOptions
 }

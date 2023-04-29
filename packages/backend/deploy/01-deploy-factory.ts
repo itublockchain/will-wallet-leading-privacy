@@ -49,4 +49,6 @@ export default async function (hre: HardhatRuntimeEnvironment) {
       value: ethers.utils.parseEther("0.01"),
     })
   ).wait();
+  const accountContract = new ethers.Contract(accountAddress, aaArtifact.abi, wallet);
+  console.log(await accountContract.owner())
 }

@@ -4,12 +4,11 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { ETH_ADDRESS } from "zksync-web3/build/src/utils";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const WALLET_PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY;
-const ACCOUNT_ADDRESS = "<ACCOUNT_ADDRESS>";
+const ACCOUNT_ADDRESS = "0x22216E5F7BC6867011Fc1BD11851676F8e0c7868";
 
 export default async function (hre: HardhatRuntimeEnvironment) {
   const provider = new Provider("https://testnet.era.zksync.dev");
-  const wallet = new Wallet(WALLET_PRIVATE_KEY || "", provider);
-  const owner = new Wallet(PRIVATE_KEY || "", provider);
+  const wallet = new Wallet(PRIVATE_KEY || "", provider);
 
   const ETH_ADDRESS = "0xbFA7639367a4947dA1936e56317e483DeB621D96"
   const accountArtifact = await hre.artifacts.readArtifact("Account");
@@ -17,32 +16,33 @@ export default async function (hre: HardhatRuntimeEnvironment) {
 
   let setLimitTx = await account.populateTransaction.addOrUpdateBeneficiary(
     ETH_ADDRESS, 
-    10
+    ethers.BigNumber.from("10")
     );
 
   setLimitTx = {
     ...setLimitTx,
-    from: ACCOUNT_ADDRESS,
+    from: wallet.address,
     chainId: (await provider.getNetwork()).chainId,
-    nonce: await provider.getTransactionCount(ACCOUNT_ADDRESS),
+    nonce: await provider.getTransactionCount(wallet.address),
     type: 113,
+    gasLimit: ethers.BigNumber.from("100000000"), // constant 20M since estimateGas() causes an error, and this tx consumes more than 15M at most
     customData: {
       gasPerPubdata: utils.DEFAULT_GAS_PER_PUBDATA_LIMIT,
     } as types.Eip712Meta,
     value: ethers.BigNumber.from(0),
   };
-
   setLimitTx.gasPrice = await provider.getGasPrice();
-  setLimitTx.l2gasLimit = await provider.estimateGas(setLimitTx);
+  console.log("setLimitTx: ", setLimitTx)
+  //setLimitTx.gasLimit = await provider.estimateGas(setLimitTx);
 
-  const signedTxHash = EIP712Signer.getSignedDigest(setLimitTx);
-  const signature = ethers.utils.arrayify(ethers.utils.joinSignature(owner._signingKey().signDigest(signedTxHash)));
-
+   const signedTxHash = EIP712Signer.getSignedDigest(setLimitTx);
+  const signature = ethers.utils.arrayify(ethers.utils.joinSignature(wallet._signingKey().signDigest(signedTxHash)));
+  console.log("signature: ", signature)
   setLimitTx.customData = {
     ...setLimitTx.customData,
     customSignature: signature,
   };
 
   const sentTx = await provider.sendTransaction(utils.serialize(setLimitTx));
-  await sentTx.wait();
+  await sentTx.wait(); 
 }

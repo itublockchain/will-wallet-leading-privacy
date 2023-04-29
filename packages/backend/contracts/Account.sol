@@ -8,8 +8,9 @@ import "@openzeppelin/contracts/interfaces/IERC1271.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@matterlabs/zksync-contracts/l2/system-contracts/Constants.sol";
 import "@matterlabs/zksync-contracts/l2/system-contracts/libraries/SystemContractsCaller.sol";
+import "./Inheritance.sol";
 
-contract Account is IAccount, IERC1271 {
+contract Account is IAccount, IERC1271, Inheritance {
     // to get transaction hash
     using TransactionHelper for Transaction;
 

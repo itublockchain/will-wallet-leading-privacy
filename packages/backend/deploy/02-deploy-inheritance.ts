@@ -1,4 +1,7 @@
 // scripts/deploy-inheritance.js
+import { utils, Wallet, Provider, Contract, EIP712Signer, types} from 'zksync-web3';
+import * as ethers from 'ethers';
+import { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 const hre = require("hardhat");
 

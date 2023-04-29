@@ -1,6 +1,6 @@
 import React from "react"
 
-const OPTIONS = ["Assets", "NFT's", "Activities"]
+const OPTIONS = ["Assets", "Inheritance", "Activities"]
 
 type HomeOptionsProps = {
   option: number

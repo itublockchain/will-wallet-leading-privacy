@@ -7,6 +7,7 @@ import OptionsButton from "./OptionsButton"
 import Profile from "./Profile"
 import Token from "./Token"
 import TokenContainer from "./TokenContainer"
+import Inheritance from "./Ineritance"
 
 export {
   Layout,
@@ -17,5 +18,6 @@ export {
   Profile,
   TokenContainer,
   Token,
-  HomeOptions
+  HomeOptions,
+  Inheritance
 }

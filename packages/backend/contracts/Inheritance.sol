@@ -87,7 +87,7 @@ contract Inheritance {
 
         uint256 tokenBalance = IERC20(_token).balanceOf(address(this));
         uint256 shareAmount = (tokenBalance *
-            beneficiariesMap[msg.sender].shares) / totalShares;
+            beneficiariesMap[msg.sender].shares) / 100;
 
         IERC20(_token).transfer(msg.sender, shareAmount);
         emit FundsClaimed(msg.sender, shareAmount);

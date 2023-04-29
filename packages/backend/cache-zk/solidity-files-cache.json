@@ -1151,8 +1151,8 @@
       ]
     },
     "/Users/alieray/Desktop/will-wallet-leading-privacy/packages/backend/contracts/Inheritance.sol": {
-      "lastModificationDate": 1682730397634,
-      "contentHash": "cfeeb8a4d1eecd7f422b8058a48d9342",
+      "lastModificationDate": 1682751453918,
+      "contentHash": "b6e18ce34e12e6b42beb7c0602e4fac4",
       "sourceName": "contracts/Inheritance.sol",
       "solcConfig": {
         "version": "0.8.13",
@@ -1486,6 +1486,52 @@
       ],
       "artifacts": [
         "Math"
+      ]
+    },
+    "/Users/alieray/Desktop/will-wallet-leading-privacy/packages/backend/contracts/SpendLimit.sol": {
+      "lastModificationDate": 1682757026387,
+      "contentHash": "f5969d80973d73c30eaf09dca8743c27",
+      "sourceName": "contracts/SpendLimit.sol",
+      "solcConfig": {
+        "version": "0.8.13",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "mode": "3"
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        },
+        "zksolc": {
+          "version": "1.3.8",
+          "compilerSource": "binary",
+          "settings": {
+            "optimizer": {
+              "enabled": true,
+              "mode": "3"
+            },
+            "compilerPath": "",
+            "experimental": {},
+            "isSystem": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.13"
+      ],
+      "artifacts": [
+        "SpendLimit"
       ]
     }
   }

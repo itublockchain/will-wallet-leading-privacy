@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.17",
-    "@plasmohq/storage": "^1.5.0",
+    "@plasmohq/storage": "0.6.3",
+    "ethers": "5.7",
     "react-qr-code": "^2.0.11",
     "react-router-dom": "^6.11.0"
   }

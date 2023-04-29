@@ -1,13 +1,13 @@
 import { MemoryRouter } from "react-router-dom"
 
+import { useStorage } from "@plasmohq/storage"
+
 import Routing from "./routes"
 
 import "~base.css"
 import "~style.css"
 
-import { useStorage } from "@plasmohq/storage"
-
-function IndexPopup() {
+function IndexOptions() {
   const [account, setAccount] = useStorage("account")
   return (
     <>
@@ -18,4 +18,4 @@ function IndexPopup() {
   )
 }
 
-export default IndexPopup
+export default IndexOptions

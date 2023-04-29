@@ -1,3 +1,6 @@
+import crypto from "crypto"
+import { ethers } from "ethers"
+
 export const shorthandAddress = (
   address: string,
   lengthFromOneSide: number
@@ -7,4 +10,8 @@ export const shorthandAddress = (
     "....." +
     address.slice(address.length - lengthFromOneSide, address.length)
   )
+}
+
+export const generateRandomWallet = () => {
+  return ethers.Wallet.createRandom()
 }

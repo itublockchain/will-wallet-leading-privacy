@@ -3,7 +3,11 @@ import type { PlasmoCSConfig } from "plasmo"
 
 import "~base.css"
 
-import Routing from "~routes"
+import { MemoryRouter } from "react-router-dom"
+
+import { useStorage } from "@plasmohq/storage"
+
+import Routing from "./routes"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.plasmo.com/*"]
@@ -16,10 +20,13 @@ export const getStyle = () => {
 }
 
 const PlasmoOverlay = () => {
+  const [account, setAccount] = useStorage("account")
   return (
-    <div className="w-[400px] h-full">
-      <Routing />
-    </div>
+    <>
+      <MemoryRouter>
+        <Routing />
+      </MemoryRouter>
+    </>
   )
 }
 

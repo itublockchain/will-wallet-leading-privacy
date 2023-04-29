@@ -3,24 +3,28 @@ import * as ethers from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { ETH_ADDRESS } from "zksync-web3/build/src/utils";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const ACCOUNT_ADDRESS = "0xB230FA8c02ac5418AA552AF207a2Dd8e7bfAba62";
-
+const WALLET_PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY;
+const ACCOUNT_ADDRESS = "0x6De0f81f009C13D3e5E77DC7aa3E7B0772F12d83";
+console.log(PRIVATE_KEY)
 export default async function (hre: HardhatRuntimeEnvironment) {
   const provider = new Provider("https://testnet.era.zksync.dev");
-  const wallet = new Wallet(PRIVATE_KEY || "", provider);
-
+  const wallet = new Wallet(WALLET_PRIVATE_KEY || "", provider);
+  const owner = new Wallet(PRIVATE_KEY || "", provider);
+  
+  
   const ETH_ADDRESS = "0xbFA7639367a4947dA1936e56317e483DeB621D96"
   const accountArtifact = await hre.artifacts.readArtifact("Account");
   const account = new Contract(ACCOUNT_ADDRESS, accountArtifact.abi, wallet);
 
+  console.log(account.address)
   let setLimitTx = await account.populateTransaction.addOrUpdateBeneficiary(
     ETH_ADDRESS, 
-    ethers.BigNumber.from("10")
+    10
     );
 
   setLimitTx = {
     ...setLimitTx,
-    from: wallet.address,
+    from: account.address,
     to: account.address,
     chainId: (await provider.getNetwork()).chainId,
     nonce: await provider.getTransactionCount(wallet.address),
@@ -32,17 +36,19 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     value: ethers.BigNumber.from(0),
   };
   setLimitTx.gasPrice = await provider.getGasPrice();
-  console.log("setLimitTx: ", setLimitTx)
-  //setLimitTx.gasLimit = await provider.estimateGas(setLimitTx);
+  
+   console.log("setLimitTx: ", setLimitTx)
+   
+  setLimitTx.gasLimit = await provider.estimateGas(setLimitTx);
 
   const signedTxHash = EIP712Signer.getSignedDigest(setLimitTx);
-  const signature = ethers.utils.arrayify(ethers.utils.joinSignature(wallet._signingKey().signDigest(signedTxHash)));
-  console.log("signature: ", ethers.utils.recoverAddress(signedTxHash, signature))
+  const signature = ethers.utils.arrayify(ethers.utils.joinSignature(owner._signingKey().signDigest(signedTxHash)));
+  
   setLimitTx.customData = {
     ...setLimitTx.customData,
     customSignature: signature,
-  };
- 
+  }; 
+
   const sentTx = await provider.sendTransaction(utils.serialize(setLimitTx));
   await sentTx.wait(); 
   

@@ -4,7 +4,7 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { values } from "./arguments";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const WALLET_PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY;
-const ACCOUNT_ADDRESS = "0xB230FA8c02ac5418AA552AF207a2Dd8e7bfAba62";
+const ACCOUNT_ADDRESS = "0x05FD302dA0760459b68FB0534fB1F09889f09787";
 
 
 export default async function (hre: HardhatRuntimeEnvironment) {

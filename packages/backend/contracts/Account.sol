@@ -14,6 +14,7 @@ contract Account is IAccount, IERC1271, Inheritance {
     // to get transaction hash
     using TransactionHelper for Transaction;
 
+
     // state variables for account owner
     address public owner;
 
@@ -55,30 +56,9 @@ contract Account is IAccount, IERC1271, Inheritance {
                 (_transaction.nonce)
             )
         );
-
-        bytes32 txHash;
-        // While the suggested signed hash is usually provided, it is generally
-        // not recommended to rely on it to be present, since in the future
-        // there may be tx types with no suggested signed hash.
-
-        if (_suggestedSignedHash == bytes32(0)) {
-            txHash = _transaction.encodeHash();
-        } else {
-            txHash = _suggestedSignedHash;
-        }
-
-        // The fact there is are enough balance for the account
-        // should be checked explicitly to prevent user paying for fee for a
-        // transaction that wouldn't be included on Ethereum.
-        uint256 totalRequiredBalance = _transaction.totalRequiredBalance();
-        require(totalRequiredBalance <= address(this).balance, "Not enough balance for fee + value");
-
-        if (isValidSignature(txHash, _transaction.signature) == EIP1271_SUCCESS_RETURN_VALUE) {
             magic = ACCOUNT_VALIDATION_SUCCESS_MAGIC;
-        } else {
-            magic = bytes4(0);
         }
-    }
+    
 
     function executeTransaction(
         bytes32,

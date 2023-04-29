@@ -1199,8 +1199,8 @@
       ]
     },
     "/home/utku/hackathon/will-wallet-leading-privacy/packages/backend/contracts/Account.sol": {
-      "lastModificationDate": 1682788744677,
-      "contentHash": "c6208d92f2af8c778f2329f39005f55d",
+      "lastModificationDate": 1682799446602,
+      "contentHash": "4390568a2a3df80f04c29ca22bb23e75",
       "sourceName": "contracts/Account.sol",
       "solcConfig": {
         "version": "0.8.13",

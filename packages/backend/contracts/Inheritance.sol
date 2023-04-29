@@ -27,6 +27,7 @@ contract Inheritance {
     }
     constructor() {
         lastActive = block.timestamp;
+        lockDuration = 365 days;
     }
 
     function addOrUpdateBeneficiary(

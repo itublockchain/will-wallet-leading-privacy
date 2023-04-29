@@ -3,8 +3,7 @@ import * as ethers from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { ETH_ADDRESS } from "zksync-web3/build/src/utils";
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const WALLET_PRIVATE_KEY = process.env.WALLET_PRIVATE_KEY;
-const ACCOUNT_ADDRESS = "0x22216E5F7BC6867011Fc1BD11851676F8e0c7868";
+const ACCOUNT_ADDRESS = "0xB230FA8c02ac5418AA552AF207a2Dd8e7bfAba62";
 
 export default async function (hre: HardhatRuntimeEnvironment) {
   const provider = new Provider("https://testnet.era.zksync.dev");
@@ -22,6 +21,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   setLimitTx = {
     ...setLimitTx,
     from: wallet.address,
+    to: account.address,
     chainId: (await provider.getNetwork()).chainId,
     nonce: await provider.getTransactionCount(wallet.address),
     type: 113,
@@ -35,14 +35,15 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   console.log("setLimitTx: ", setLimitTx)
   //setLimitTx.gasLimit = await provider.estimateGas(setLimitTx);
 
-   const signedTxHash = EIP712Signer.getSignedDigest(setLimitTx);
+  const signedTxHash = EIP712Signer.getSignedDigest(setLimitTx);
   const signature = ethers.utils.arrayify(ethers.utils.joinSignature(wallet._signingKey().signDigest(signedTxHash)));
-  console.log("signature: ", signature)
+  console.log("signature: ", ethers.utils.recoverAddress(signedTxHash, signature))
   setLimitTx.customData = {
     ...setLimitTx.customData,
     customSignature: signature,
   };
-
+ 
   const sentTx = await provider.sendTransaction(utils.serialize(setLimitTx));
   await sentTx.wait(); 
+  
 }

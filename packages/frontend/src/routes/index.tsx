@@ -17,7 +17,7 @@ const Routing = () => (
         </Layout>
       }
     />
-    <Route path="/beneficiaries" element={<Beneficiaries />}/>
+    <Route path="/beneficiaries" element={<Layout><Beneficiaries /></Layout>}/>
     <Route path="/generate-wallet" element={<WalletGenerate />} />
   </Routes>
 )

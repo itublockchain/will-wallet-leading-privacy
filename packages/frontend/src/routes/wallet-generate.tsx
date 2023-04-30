@@ -52,11 +52,6 @@ const WalletGenerate = () => {
     )
 
     setWallet({ address: walletAddress, nonce: 0, name: "Account 1" })
-    await deployer.sendTransaction({
-      from: deployer.address,
-      to: walletAddress,
-      value: await provider.getBalance(deployer.address)
-    })
     try {
       await deployer.sendTransaction({
         from: deployer.address,

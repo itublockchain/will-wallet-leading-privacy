@@ -30,7 +30,6 @@ const WalletGenerate = () => {
   }
 
   const handleCreateAccount = async () => {
-    console.log(account.privateKey)
     const deployer = new Wallet(account.privateKey, provider)
     const aaFactory = new ethers.Contract(
       AA_FACTORY_ADDRESS,
@@ -53,7 +52,7 @@ const WalletGenerate = () => {
     )
 
     setWallet({ address: walletAddress, nonce: 0, name: "Account 1" })
-    console.log(`Account deployed on address ${walletAddress}`)
+    navigation("/home")
   }
 
   useEffect(() => {

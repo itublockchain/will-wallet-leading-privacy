@@ -8,6 +8,9 @@ import Profile from "./Profile"
 import Token from "./Token"
 import TokenContainer from "./TokenContainer"
 import Inheritance from "./Ineritance"
+import Beneficiary from "./Beneficiary"
+import BeneficiaryContainer from "./BeneficiaryContainer"
+
 
 export {
   Layout,
@@ -19,5 +22,7 @@ export {
   TokenContainer,
   Token,
   HomeOptions,
-  Inheritance
+  Inheritance,
+  Beneficiary,
+  BeneficiaryContainer
 }

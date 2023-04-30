@@ -21,6 +21,8 @@ export const getStyle = () => {
 
 const PlasmoOverlay = () => {
   const [account, setAccount] = useStorage("account")
+  const [wallet, setWallet] = useStorage("wallet")
+
   return (
     <>
       <MemoryRouter>

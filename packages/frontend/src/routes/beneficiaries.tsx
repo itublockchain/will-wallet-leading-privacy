@@ -7,7 +7,8 @@ const Beneficiaries = () => {
   return (
     <>
       <div className="w-[375px] h-[600px]">
-        <div onClick={() => navigation("/home")}>
+        <div onClick={() => navigation("/home")}
+        className="pl-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

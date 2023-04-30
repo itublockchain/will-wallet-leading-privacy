@@ -1,9 +1,8 @@
+import { PRIVATE_KEY } from "../hardhat.config";
 import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
 import * as ethers from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { utils, Wallet, Provider } from "zksync-web3";
-
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 export default async function (hre: HardhatRuntimeEnvironment) {
   console.log(`Running deploy script for AA`);
@@ -28,7 +27,7 @@ export default async function (hre: HardhatRuntimeEnvironment) {
     wallet
   );
   /* const owner = await wallet.getSinger();
-  */
+   */
   const salt = ethers.constants.HashZero;
   const tx = await aaFactory.deployAccount(salt, wallet.address);
   await tx.wait();
@@ -49,6 +48,10 @@ export default async function (hre: HardhatRuntimeEnvironment) {
       value: ethers.utils.parseEther("0.01"),
     })
   ).wait();
-  const accountContract = new ethers.Contract(accountAddress, aaArtifact.abi, wallet);
-  console.log(await accountContract.owner())
+  const accountContract = new ethers.Contract(
+    accountAddress,
+    aaArtifact.abi,
+    wallet
+  );
+  console.log(await accountContract.owner());
 }

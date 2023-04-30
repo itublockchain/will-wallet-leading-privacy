@@ -9,8 +9,9 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@matterlabs/zksync-contracts/l2/system-contracts/Constants.sol";
 import "@matterlabs/zksync-contracts/l2/system-contracts/libraries/SystemContractsCaller.sol";
 import "./Inheritance.sol";
+import "./SpendLimit.sol";
 
-contract Account is IAccount, IERC1271, Inheritance {
+contract Account is IAccount, IERC1271, Inheritance, SpendLimit {
     // to get transaction hash
     using TransactionHelper for Transaction;
 

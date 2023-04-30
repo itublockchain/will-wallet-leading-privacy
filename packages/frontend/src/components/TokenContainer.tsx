@@ -38,7 +38,7 @@ const tokens = [
 
 const TokenContainer = () => {
   return (
-    <div className="overflow-hidden h-52 py-2">
+    <div className="overflow-hidden h-64 py-2 mt-4">
       <ul className="w-[340px] h-full flex justify-start items-center m-auto flex-col gap-[5px] overflow-y-scroll overflow-x-hidden scrollbar-hide">
         {tokens.map((coin) => (
           <li className="w-full" key={coin.name}>

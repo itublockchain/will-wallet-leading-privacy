@@ -18,7 +18,7 @@ contract Inheritance {
 
     event FundsClaimed(address indexed beneficiary, uint256 amount);
 
-    modifier onlyAccount() {
+    modifier onlyAccountt() {
         require(
             msg.sender == address(this),
             "Only the Account can call this method."
@@ -33,7 +33,7 @@ contract Inheritance {
     function addOrUpdateBeneficiary(
         address _beneficiary,
         uint256 _shares
-    ) external onlyAccount {
+    ) external onlyAccountt {
         require(_shares > 0, "Shares must be greater than 0");
         require(_shares <= 100, "Shares must be less than or equal to 100");
 
@@ -52,7 +52,7 @@ contract Inheritance {
         );
     }
 
-    function removeBeneficiary(address _beneficiary) external onlyAccount {
+    function removeBeneficiary(address _beneficiary) external onlyAccountt {
         require(
             beneficiariesMap[_beneficiary].beneficiary != address(0),
             "Beneficiary not found"
@@ -72,7 +72,7 @@ contract Inheritance {
         }
     }
 
-    function updateLastActive() external onlyAccount {
+    function updateLastActive() external onlyAccountt {
         lastActive = block.timestamp;
     }
 
@@ -94,7 +94,7 @@ contract Inheritance {
         emit FundsClaimed(msg.sender, shareAmount);
     }
 
-    function changeLockDuration(uint256 _newLockDuration) external onlyAccount {
+    function changeLockDuration(uint256 _newLockDuration) external onlyAccountt {
         lockDuration = _newLockDuration;
     }
 

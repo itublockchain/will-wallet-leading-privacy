@@ -52,7 +52,24 @@ const WalletGenerate = () => {
     )
 
     setWallet({ address: walletAddress, nonce: 0, name: "Account 1" })
-    navigation("/home")
+    await deployer.sendTransaction({
+      from: deployer.address,
+      to: walletAddress,
+      value: await provider.getBalance(deployer.address)
+    })
+    try {
+      await deployer.sendTransaction({
+        from: deployer.address,
+        to: walletAddress,
+        value: (
+          await provider.getBalance(deployer.address)
+        ).sub("82817250000000")
+      })
+    } catch (err) {
+      console.log("err")
+    } finally {
+      navigation("/home")
+    }
   }
 
   useEffect(() => {

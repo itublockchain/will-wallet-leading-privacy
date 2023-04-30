@@ -1,5 +1,8 @@
-import crypto from "crypto"
 import { ethers } from "ethers"
+
+import { addBeneficiary } from "./addBeneficiary"
+import { sendIAmAlive } from "./sendIAmAlive"
+import { setCountDownTime } from "./setCountDownTime"
 
 export const shorthandAddress = (
   address: string,
@@ -19,3 +22,5 @@ export const generateRandomWallet = () => {
     address: account.address
   }
 }
+
+export { sendIAmAlive, setCountDownTime, addBeneficiary }

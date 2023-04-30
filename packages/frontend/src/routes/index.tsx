@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom"
 
 import { Layout } from "../components"
+import AddBeneficiary from "./add-beneficiary"
+import Beneficiaries from "./beneficiaries"
+import Beneficiaries from "./beneficiaries"
 import Home from "./home"
 import Landing from "./landing"
 import WalletGenerate from "./wallet-generate"
-import Beneficiaries from "./beneficiaries"
-import AddBeneficiary from "./add-beneficiary"
 
 const Routing = () => (
   <Routes>
@@ -18,9 +19,23 @@ const Routing = () => (
         </Layout>
       }
     />
-    <Route path="/beneficiaries" element={<Layout><Beneficiaries /></Layout>}/>
+    <Route
+      path="/beneficiaries"
+      element={
+        <Layout>
+          <Beneficiaries />
+        </Layout>
+      }
+    />
     <Route path="/generate-wallet" element={<WalletGenerate />} />
-    <Route path="/add-beneficiary" element={<Layout><AddBeneficiary /></Layout>} />
+    <Route
+      path="/add-beneficiary"
+      element={
+        <Layout>
+          <AddBeneficiary />
+        </Layout>
+      }
+    />
   </Routes>
 )
 

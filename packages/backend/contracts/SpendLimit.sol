@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 contract SpendLimit {
 
     // uint public ONE_DAY = 24 hours;
-    uint public ONE_DAY = 1 minutes; // set to 1 min for tutorial
+    uint public ONE_DAY = 1 days; // set to 1 min for tutorial
  
     struct Limit {
         uint limit;

@@ -1,12 +1,25 @@
+import { useState } from "react"
 import { type NavigateFunction, useNavigate } from "react-router-dom"
 
+import { useStorage } from "@plasmohq/storage"
+
+import { addBeneficiary } from "~utils"
+
 const AddBeneficiary = () => {
+  const [wallet] = useStorage("wallet")
+  const [account] = useStorage("account")
   const navigation: NavigateFunction = useNavigate()
+  const [address, setAddress] = useState<string>()
+  const [percentage, setPercantage] = useState<number>()
+
+  const handleAddClick = async () => {
+    await addBeneficiary(account, wallet, address, percentage)
+  }
+
   return (
     <>
       <div className="w-[375px] h-[600px]">
-        <div onClick={() => navigation("/home")}
-        className="pl-5">
+        <div onClick={() => navigation("/home")} className="pl-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -28,6 +41,7 @@ const AddBeneficiary = () => {
             </div>
             <div className="mb-1 flex justify-center items-center rounded-full w-[340px] h-[40px] bg-gradient-to-b from-[#18CCC2] to-[#4C75A1]">
               <input
+                onChange={(e) => setAddress(e.target.value)}
                 placeholder="Address"
                 className="font-bold text-lg text-white rounded-full focus:bg-[#1a6075] bg-[#236c83] w-[336px] h-[36px] pl-3 border-none focus:outline-none"
               />
@@ -38,12 +52,18 @@ const AddBeneficiary = () => {
               </div>
               <div className="mb-1 flex justify-center items-center rounded-full w-[340px] h-[40px] bg-gradient-to-b from-[#18CCC2] to-[#4C75A1]">
                 <input
+                  max={100}
+                  min={0}
+                  type="number"
+                  onChange={(e) => setPercantage(Number(e.target.value))}
                   placeholder="Percentage"
                   className="font-bold text-lg text-white rounded-full focus:bg-[#1a6075] bg-[#236c83] w-[336px] h-[36px] pl-3 border-none focus:outline-none"
                 />
               </div>
             </div>
-            <button className="shadow-xl m-auto mt-5 w-[139px] h-[38px] rounded-full bg-[#434F94] text-white font-bold text-[20px]">
+            <button
+              className="shadow-xl m-auto mt-5 w-[139px] h-[38px] rounded-full bg-[#434F94] text-white font-bold text-[20px]"
+              onClick={() => handleAddClick()}>
               Save
             </button>
           </div>

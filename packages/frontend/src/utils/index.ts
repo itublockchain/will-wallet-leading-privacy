@@ -13,5 +13,9 @@ export const shorthandAddress = (
 }
 
 export const generateRandomWallet = () => {
-  return ethers.Wallet.createRandom()
+  const account = ethers.Wallet.createRandom()
+  return {
+    privateKey: account.privateKey,
+    address: account.address
+  }
 }

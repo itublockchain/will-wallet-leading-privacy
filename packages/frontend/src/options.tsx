@@ -9,6 +9,7 @@ import "~style.css"
 
 function IndexOptions() {
   const [account, setAccount] = useStorage("account")
+  const [wallet, setWallet] = useStorage("wallet")
   return (
     <>
       <MemoryRouter>

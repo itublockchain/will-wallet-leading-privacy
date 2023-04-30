@@ -8,8 +8,11 @@ import Intro from "../assets/intro.gif"
 const Landing = () => {
   const navigation: NavigateFunction = useNavigate()
   const [account] = useStorage("account")
-  if (account !== undefined && account !== null) {
+  const [wallet] = useStorage("wallet")
+  if (wallet !== undefined && wallet !== null) {
     navigation("/home")
+  } else if (wallet !== undefined && wallet !== null) {
+    navigation("/generate-wallet")
   }
 
   useEffect(() => {

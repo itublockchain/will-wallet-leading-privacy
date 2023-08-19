@@ -1,21 +1,31 @@
-import * as dotenv from "dotenv";
 import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-foundry";
 import "@matterlabs/hardhat-zksync-deploy";
 import "@matterlabs/hardhat-zksync-solc";
+import "ethers";
 import "@matterlabs/hardhat-zksync-verify";
-
-dotenv.config();
-
-export const PRIVATE_KEY =
-  "7e198860a4a1cb91a16c7084f44c6466c8c32d19f372bd8d026743be72014e13";
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
-const GOERLI_URL = process.env.GOERLI_URL;
-const COIN_MARKET_CAP_API_KEY = process.env.COIN_MARKET_CAP_API_KEY;
+import dotevn from "dotenv";
+dotevn.config();
+// dynamically changes endpoints for local tests
+const zkSyncTestnet =
+  process.env.NODE_ENV == "test"
+    ? {
+        url: "http://localhost:8011",
+        ethNetwork: "http://localhost:8545",
+        zksync: true,
+      }
+    : {
+        url: "https://zksync2-testnet.zksync.dev",
+        ethNetwork: "goerli",
+        zksync: true,
+        // contract verification endpoint
+        verifyURL:
+          "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
+      };
 
 const config: HardhatUserConfig = {
   zksolc: {
-    version: "1.3.8",
-    compilerSource: "binary",
+    version: "latest",
     settings: {
       isSystem: true,
     },
@@ -25,17 +35,13 @@ const config: HardhatUserConfig = {
     hardhat: {
       zksync: true,
     },
-    zkSyncTestnet: {
-      url: "https://zksync2-testnet.zksync.dev",
-      accounts: [PRIVATE_KEY || ""],
-      ethNetwork: "goerli",
-      zksync: true,
-      verifyURL:
-        "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
-    },
+    zkSyncTestnet,
+  },
+  etherscan: {
+    apiKey: process.env.api_key,
   },
   solidity: {
-    version: "0.8.13",
+    version: "0.8.18",
   },
 };
 
